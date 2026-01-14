@@ -6,24 +6,20 @@ import com.swasthyasetu.authservice.repository.OtpSessionRepository;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class OtpService {
-  private static final Logger logger = LoggerFactory.getLogger(OtpService.class);
   private static final SecureRandom random = new SecureRandom();
 
   private final OtpSessionRepository otpSessionRepository;
   private final PasswordEncoder passwordEncoder;
-
-  public OtpService(OtpSessionRepository otpSessionRepository, PasswordEncoder passwordEncoder) {
-    this.otpSessionRepository = otpSessionRepository;
-    this.passwordEncoder = passwordEncoder;
-  }
 
   public UUID createOtpSession(String phone) {
     String otp = generateOtp();
@@ -41,7 +37,7 @@ public class OtpService {
     );
     otpSessionRepository.save(session);
 
-    logger.info("OTP for {} is {}", phone, otp);
+    log.info("OTP for {} is {}", phone, otp);
     return sessionId;
   }
 

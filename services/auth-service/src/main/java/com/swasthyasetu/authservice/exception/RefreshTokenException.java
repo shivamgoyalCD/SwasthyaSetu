@@ -1,5 +1,8 @@
 package com.swasthyasetu.authservice.exception;
 
+import lombok.Getter;
+
+@Getter
 public class RefreshTokenException extends RuntimeException {
   public enum Status {
     BAD_REQUEST,
@@ -13,13 +16,5 @@ public class RefreshTokenException extends RuntimeException {
     super(message);
     this.code = code;
     this.status = status;
-  }
-
-  public String getCode() {
-    return code;
-  }
-
-  public Status getStatus() {
-    return status;
   }
 }

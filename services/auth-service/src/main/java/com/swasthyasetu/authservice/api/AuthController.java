@@ -6,15 +6,13 @@ import com.swasthyasetu.authservice.dto.RefreshTokenRequest;
 import com.swasthyasetu.authservice.dto.RefreshTokenResponse;
 import com.swasthyasetu.authservice.dto.VerifyOtpRequest;
 import com.swasthyasetu.authservice.dto.VerifyOtpResponse;
-import com.swasthyasetu.authservice.service.OtpService;
 import com.swasthyasetu.authservice.exception.OtpVerificationException;
 import com.swasthyasetu.authservice.exception.RefreshTokenException;
-import com.swasthyasetu.authservice.service.AuthTokenService;
-import com.swasthyasetu.authservice.service.TokenPair;
+import com.swasthyasetu.authservice.service.AuthService;
 import com.swasthyasetu.common.dtos.ApiError;
 import com.swasthyasetu.common.dtos.ApiResponse;
-import com.swasthyasetu.common.security.Role;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,18 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
-  private final OtpService otpService;
-  private final AuthTokenService authTokenService;
-
-  public AuthController(OtpService otpService, AuthTokenService authTokenService) {
-    this.otpService = otpService;
-    this.authTokenService = authTokenService;
-  }
+  private final AuthService authService;
 
   @PostMapping("/request-otp")
   public ApiResponse<RequestOtpResponse> requestOtp(@RequestBody RequestOtpRequest request) {
-    UUID sessionId = otpService.createOtpSession(request.getPhone());
+    UUID sessionId = authService.requestOtp(request.getPhone());
     return new ApiResponse<>(true, new RequestOtpResponse(sessionId.toString()), null);
   }
 
@@ -57,12 +50,7 @@ public class AuthController {
 
     try {
       UUID sessionId = UUID.fromString(request.getSessionId());
-      String phone = otpService.verifyOtp(sessionId, request.getOtp()).getPhone();
-      TokenPair tokenPair = authTokenService.issueTokens(phone, Role.PATIENT);
-      VerifyOtpResponse response = new VerifyOtpResponse(
-          tokenPair.getAccessToken(),
-          tokenPair.getRefreshToken()
-      );
+      VerifyOtpResponse response = authService.verifyOtp(sessionId, request.getOtp());
       return ResponseEntity.ok(new ApiResponse<>(true, response, null));
     } catch (IllegalArgumentException ex) {
       return ResponseEntity.badRequest().body(new ApiResponse<>(
@@ -97,12 +85,8 @@ public class AuthController {
     }
 
     try {
-      String accessToken = authTokenService.refreshAccessToken(request.getRefreshToken());
-      return ResponseEntity.ok(new ApiResponse<>(
-          true,
-          new RefreshTokenResponse(accessToken),
-          null
-      ));
+      RefreshTokenResponse response = authService.refresh(request.getRefreshToken());
+      return ResponseEntity.ok(new ApiResponse<>(true, response, null));
     } catch (RefreshTokenException ex) {
       HttpStatus status = ex.getStatus() == RefreshTokenException.Status.UNAUTHORIZED
           ? HttpStatus.UNAUTHORIZED

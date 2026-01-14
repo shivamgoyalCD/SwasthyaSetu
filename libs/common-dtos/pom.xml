@@ -14,4 +14,13 @@
   <artifactId>common-dtos</artifactId>
   <packaging>jar</packaging>
   <name>SwasthyaSetu Common DTOs</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 </project>

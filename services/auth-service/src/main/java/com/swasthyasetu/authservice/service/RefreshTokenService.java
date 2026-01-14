@@ -6,22 +6,16 @@ import com.swasthyasetu.authservice.repository.RefreshTokenRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class RefreshTokenService {
   private final RefreshTokenRepository refreshTokenRepository;
   private final PasswordEncoder passwordEncoder;
-
-  public RefreshTokenService(
-      RefreshTokenRepository refreshTokenRepository,
-      PasswordEncoder passwordEncoder
-  ) {
-    this.refreshTokenRepository = refreshTokenRepository;
-    this.passwordEncoder = passwordEncoder;
-  }
 
   @Transactional
   public void storeRefreshToken(UUID userId, String refreshToken, LocalDateTime expiresAt) {

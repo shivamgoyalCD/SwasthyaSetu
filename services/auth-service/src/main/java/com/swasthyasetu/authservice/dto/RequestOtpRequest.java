@@ -1,20 +1,12 @@
 package com.swasthyasetu.authservice.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RequestOtpRequest {
   private String phone;
-
-  public RequestOtpRequest() {
-  }
-
-  public RequestOtpRequest(String phone) {
-    this.phone = phone;
-  }
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
 }

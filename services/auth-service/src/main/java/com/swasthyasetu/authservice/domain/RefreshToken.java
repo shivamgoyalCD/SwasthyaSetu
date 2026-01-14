@@ -6,9 +6,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "refresh_token")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RefreshToken {
   @Id
   @Column(name = "id", nullable = false, columnDefinition = "uuid")
@@ -28,71 +36,4 @@ public class RefreshToken {
 
   @Column(name = "created_at", nullable = false)
   private LocalDateTime createdAt;
-
-  public RefreshToken() {
-  }
-
-  public RefreshToken(
-      UUID id,
-      UUID userId,
-      String tokenHash,
-      LocalDateTime expiresAt,
-      boolean revoked,
-      LocalDateTime createdAt
-  ) {
-    this.id = id;
-    this.userId = userId;
-    this.tokenHash = tokenHash;
-    this.expiresAt = expiresAt;
-    this.revoked = revoked;
-    this.createdAt = createdAt;
-  }
-
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public UUID getUserId() {
-    return userId;
-  }
-
-  public void setUserId(UUID userId) {
-    this.userId = userId;
-  }
-
-  public String getTokenHash() {
-    return tokenHash;
-  }
-
-  public void setTokenHash(String tokenHash) {
-    this.tokenHash = tokenHash;
-  }
-
-  public LocalDateTime getExpiresAt() {
-    return expiresAt;
-  }
-
-  public void setExpiresAt(LocalDateTime expiresAt) {
-    this.expiresAt = expiresAt;
-  }
-
-  public boolean isRevoked() {
-    return revoked;
-  }
-
-  public void setRevoked(boolean revoked) {
-    this.revoked = revoked;
-  }
-
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
 }

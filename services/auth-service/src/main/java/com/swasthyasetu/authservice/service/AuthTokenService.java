@@ -10,24 +10,18 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthTokenService {
+  @Qualifier("accessJwtUtil")
   private final JwtUtil accessJwtUtil;
+  @Qualifier("refreshJwtUtil")
   private final JwtUtil refreshJwtUtil;
   private final RefreshTokenService refreshTokenService;
-
-  public AuthTokenService(
-      @Qualifier("accessJwtUtil") JwtUtil accessJwtUtil,
-      @Qualifier("refreshJwtUtil") JwtUtil refreshJwtUtil,
-      RefreshTokenService refreshTokenService
-  ) {
-    this.accessJwtUtil = accessJwtUtil;
-    this.refreshJwtUtil = refreshJwtUtil;
-    this.refreshTokenService = refreshTokenService;
-  }
 
   public TokenPair issueTokens(String phone, Role role) {
     String userId = UUID.nameUUIDFromBytes(phone.getBytes(StandardCharsets.UTF_8)).toString();

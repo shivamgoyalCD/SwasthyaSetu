@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:swasthyasetu}
     username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    password: ${POSTGRES_PASSWORD:Shivam@123}
   jpa:
     hibernate:
       ddl-auto: none

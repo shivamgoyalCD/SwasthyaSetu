@@ -1,6 +1,7 @@
 package com.swasthyasetu.apigateway;
 
 import com.swasthyasetu.common.security.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -10,15 +11,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+@RequiredArgsConstructor
 @Component
 public class JwtAuthFilter implements GlobalFilter, Ordered {
   private static final String AUTH_PREFIX = "Bearer ";
 
   private final JwtUtil jwtUtil;
-
-  public JwtAuthFilter(JwtUtil jwtUtil) {
-    this.jwtUtil = jwtUtil;
-  }
 
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
