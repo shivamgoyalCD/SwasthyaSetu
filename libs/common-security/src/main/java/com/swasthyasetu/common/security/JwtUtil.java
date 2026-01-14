@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.util.Date;
 
 public class JwtUtil {
+  public static final String ROLE_CLAIM = "role";
+
   private final JwtParser parser;
   private final Key key;
   private final Duration tokenTtl;
@@ -30,10 +32,13 @@ public class JwtUtil {
   }
 
   public String createToken(String userId, Role role) {
+    if (role == null) {
+      throw new IllegalArgumentException("role must be set");
+    }
     Instant now = Instant.now();
     return Jwts.builder()
         .setSubject(userId)
-        .claim("role", role.name())
+        .claim(ROLE_CLAIM, role.name())
         .setIssuedAt(Date.from(now))
         .setExpiration(Date.from(now.plus(tokenTtl)))
         .signWith(key, SignatureAlgorithm.HS256)
