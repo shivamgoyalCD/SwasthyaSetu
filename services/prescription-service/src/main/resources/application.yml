@@ -26,3 +26,6 @@ minio:
   access-key: ${MINIO_ROOT_USER:minioadmin}
   secret-key: ${MINIO_ROOT_PASSWORD:minioadmin}
   bucket: ${MINIO_BUCKET:swasthyasetu}
+
+chat-service:
+  base-url: ${CHAT_SERVICE_BASE_URL:http://chat-service:8084}
