@@ -1,0 +1,14 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: rtc-signaling-service
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+translation-service:
+  base-url: ${TRANSLATION_SERVICE_BASE_URL:http://translation-service:8085}
