@@ -1,537 +1,721 @@
-SwasthyaSetu
-<p align="center"> <img src="https://img.shields.io/badge/Backend-Java%2017%20%7C%20Spring%20Boot-brightgreen" alt="Backend" /> <img src="https://img.shields.io/badge/Frontend-React%20%7C%20TailwindCSS-61DAFB" alt="Frontend" /> <img src="https://img.shields.io/badge/Database-MySQL-orange" alt="Database" /> <img src="https://img.shields.io/badge/Realtime-WebSocket%20%7C%20WebRTC-blue" alt="Realtime" /> <img src="https://img.shields.io/badge/Auth-JWT%20%7C%20RBAC-red" alt="Auth" /> <img src="https://img.shields.io/badge/AI-LLM%20Live%20Translation-purple" alt="AI" /> <img src="https://img.shields.io/badge/Build-Maven-C71A36" alt="Build" /> </p> <p align="center"> <b>AI-powered telehealth and doctor consultation platform for rural and remote healthcare access</b> </p> <p align="center"> SwasthyaSetu enables doctor discovery, appointment booking, real-time chat, audio/video consultation, e-prescriptions, and multilingual communication through live AI translation. </p>
-Table of Contents
-Overview
-Problem Statement
-Why This Project Stands Out
-Features
-Patient Features
-Doctor Features
-Admin Features
-Live Translation Engine
-Tech Stack
-System Architecture
-Architecture Diagram
-Appointment Booking Flow
-Consultation Flow
-Database Design
-Entity Relationship Diagram
-Module Breakdown
-API Overview
-Realtime Events
-Project Structure
-Getting Started
-Environment Variables
-Deployment Architecture
-Security
-Scalability
-Testing Strategy
-Roadmap
-Screenshots
-Resume Value
-Author
-Overview
+<p align="center">
+  <img src="docs/logo.png" alt="SwasthyaSetu Logo" width="80" />
+</p>
 
-SwasthyaSetu is a full-stack telehealth platform built to improve healthcare accessibility for rural and underserved users. It allows patients to search doctors, book appointments, join chat or audio/video consultations, receive digital prescriptions, and overcome language barriers through live AI translation.
+<h1 align="center">🏥 SwasthyaSetu</h1>
 
-The project combines Java Spring Boot, React, MySQL, WebSocket, WebRTC, and LLM-based translation to simulate a real-world healthcare product with production-grade workflows.
+<p align="center">
+  <strong>AI-Powered Telehealth & Doctor Consultation Platform</strong>
+</p>
 
-Problem Statement
+<p align="center">
+  <em>Bridging healthcare gaps with real-time consultations, AI-powered live translation, and digital prescriptions.</em>
+</p>
 
-Patients in rural and semi-urban areas often face major barriers in accessing quality healthcare:
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17" />
+  <img src="https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot" />
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/WebRTC-Enabled-333333?style=for-the-badge&logo=webrtc&logoColor=white" alt="WebRTC" />
+  <img src="https://img.shields.io/badge/AI-Live_Translation-FF6F00?style=for-the-badge&logo=openai&logoColor=white" alt="AI Translation" />
+</p>
 
-limited access to nearby specialists
-long travel distances
-language mismatch between doctor and patient
-inefficient appointment scheduling
-poor continuity of prescriptions and consultation history
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-live-translation-engine">Translation Engine</a> •
+  <a href="#%EF%B8%8F-system-architecture">Architecture</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-roadmap">Roadmap</a>
+</p>
 
-Doctors also face operational problems such as:
+---
 
-manual slot handling
-fragmented patient context
-inefficient follow-up communication
-weak digital consultation workflows
+## 📖 Overview
 
-SwasthyaSetu solves these challenges by providing a secure, real-time telemedicine platform with appointment management, consultation support, prescription workflows, and multilingual communication.
+**SwasthyaSetu** (स्वास्थ्यसेतु — *"Bridge to Health"*) is a full-stack telehealth platform built to improve healthcare accessibility for rural and underserved communities. It enables patients to discover doctors, book appointments, join real-time chat or audio/video consultations, receive digital prescriptions, and communicate across language barriers through **live AI-powered translation**.
 
-Why This Project Stands Out
-Real-world healthcare use case with strong product relevance
-End-to-end consultation lifecycle
-Secure role-based architecture
-WebRTC-based audio/video communication
-WebSocket-powered real-time chat and signaling
-LLM-powered multilingual translation layer
-E-prescription and consultation history support
-Modular architecture that can scale from monolith to microservices
-Strong resume value for backend, full-stack, and system design roles
-Features
-Patient Features
-Secure registration and login
-Search doctors by specialization, language, and availability
-View doctor profiles and consultation modes
-Book, reschedule, and cancel appointments
-Join chat, audio, or video consultations
-Receive translated chat messages and call transcripts
-Access e-prescriptions and consultation summaries
-Track appointment history and medical records
-Receive reminders and notifications
-Doctor Features
-Doctor onboarding and profile management
-Set availability slots and consultation timings
-Accept or reject appointments
-Join consultation room with patient
-Access patient history during consultation
-Create digital prescriptions
-Add treatment notes and follow-up guidance
-Maintain consultation records for continuity of care
-Admin Features
-Verify doctor registrations
-Manage patient and doctor accounts
-Monitor consultations and appointments
-View platform analytics
-Track operational activity and usage
-Moderate misuse and flagged issues
-Live Translation Engine
+> Built with Java Spring Boot, React, MySQL, WebSocket, WebRTC, and LLM-based translation — designed to simulate a production-grade healthcare product.
 
-One of the strongest differentiators of SwasthyaSetu is its AI-powered translation layer.
+---
 
-What it does
-translates chat messages in real time
-converts speech to text during consultations
-translates transcripts into the user’s preferred language
-preserves translated communication history for future reference
-Example Use Case
-patient speaks in Hindi
-doctor prefers English
-patient audio is transcribed
-transcript is translated into English
-doctor responds in English
-response is translated into Hindi for the patient
+## 🎯 Problem Statement
 
-This allows consultations to continue smoothly even when doctor and patient do not speak the same language.
+### For Patients
+Patients in rural and semi-urban areas face critical barriers: limited access to specialists, long travel distances, language mismatches with doctors, inefficient scheduling, and poor continuity of prescriptions and consultation history.
 
-Tech Stack
-Frontend
-React
-Tailwind CSS
-React Router
-Axios
-Zustand / Context API
-WebSocket/STOMP client
-WebRTC integration
-Backend
-Java 17
-Spring Boot
-Spring Security
-Spring Data JPA
-Hibernate
-Spring WebSocket
-Maven
-Database
-MySQL
-Realtime
-WebSocket / STOMP
-WebRTC
-Authentication & Authorization
-JWT Authentication
-BCrypt Password Hashing
-Role-Based Access Control
-AI / Integrations
-LLM / Translation API
-Speech-to-Text integration
-Optional Text-to-Speech integration
-DevOps / Deployment
-Docker
-Nginx
-Railway / Render / AWS / VPS
-System Architecture
+### For Doctors
+Doctors deal with manual slot management, fragmented patient context, inefficient follow-up workflows, and weak digital consultation tooling.
 
-SwasthyaSetu follows a modular architecture:
+### The Solution
+SwasthyaSetu provides a secure, real-time telemedicine platform with end-to-end appointment management, consultation support, prescription workflows, and multilingual communication — all in one place.
 
-React frontend for patient, doctor, and admin interfaces
-Spring Boot backend for REST APIs, business logic, scheduling, and authorization
-WebSocket/STOMP for real-time chat and signaling
-WebRTC for peer-to-peer audio/video consultation
-MySQL for persistence
-LLM / Translation service for multilingual consultation support
-Architecture Diagram
-Appointment Booking Flow
-Consultation Flow
-Database Design
+---
 
-The database is centered around users, doctors, patients, appointments, consultations, prescriptions, chat messages, and notifications.
+## ✨ Features
 
-Main Tables
-users
-roles
-patients
-doctors
-doctor_availability
-appointments
-consultation_sessions
-chat_messages
-prescriptions
-prescription_items
-medical_records
-notifications
-translations
-Entity Relationship Diagram
-Module Breakdown
-1. Authentication Module
+### 👤 Patient Portal
+- 🔐 Secure registration & JWT-based login
+- 🔍 Search doctors by specialization, language & availability
+- 📅 Book, reschedule & cancel appointments
+- 💬 Real-time chat with AI-translated messages
+- 📹 Audio/video consultations via WebRTC
+- 💊 Access e-prescriptions & consultation summaries
+- 📋 Track appointment history & medical records
+- 🔔 Appointment reminders & notifications
 
-Handles:
+### 🩺 Doctor Dashboard
+- 📝 Onboarding & profile management
+- 🕐 Configurable availability slots
+- ✅ Accept / reject appointment requests
+- 👨‍⚕️ Join consultation rooms with full patient context
+- 📄 Create digital prescriptions with treatment notes
+- 📂 Maintain consultation records for continuity of care
 
-signup/login
-JWT creation and validation
-role-based authorization
-secured route access
-2. User Management Module
+### 🛡️ Admin Console
+- ✔️ Verify doctor registrations
+- 👥 Manage patient & doctor accounts
+- 📊 Platform analytics & usage monitoring
+- 🚩 Moderate flagged issues & misuse
 
-Handles:
+---
 
-patient profile
-doctor profile
-admin verification flow
-account lifecycle basics
-3. Doctor Discovery Module
+## 🌐 Live Translation Engine
 
-Handles:
+One of SwasthyaSetu's strongest differentiators — an **AI-powered translation layer** that breaks language barriers during consultations.
 
-doctor search
-specialization filter
-language filter
-availability lookup
-4. Appointment Module
+### How It Works
 
-Handles:
+```mermaid
+sequenceDiagram
+    participant P as 🧑 Patient (Hindi)
+    participant FE as 💻 Frontend
+    participant WS as 🔌 WebSocket
+    participant AI as 🤖 Translation API
+    participant D as 👨‍⚕️ Doctor (English)
 
-slot creation
-appointment booking
-cancellation and rescheduling
-status transitions
-5. Chat Module
+    P->>FE: Speaks / types in Hindi
+    FE->>WS: Send message
+    WS->>AI: Translate Hindi → English
+    AI-->>WS: Translated text
+    WS-->>D: Display in English
 
-Handles:
+    D->>FE: Responds in English
+    FE->>WS: Send message
+    WS->>AI: Translate English → Hindi
+    AI-->>WS: Translated text
+    WS-->>P: Display in Hindi
+```
 
-real-time text messaging
-room-specific chat
-message persistence
-translated message storage
-6. Consultation Module
+### Capabilities
+- ⚡ Real-time chat message translation
+- 🎙️ Speech-to-text during live consultations
+- 📝 Transcript translation into user's preferred language
+- 🗂️ Translated communication history preserved for future reference
 
-Handles:
+---
 
-call join/leave logic
-WebRTC signaling
-consultation room state
-session lifecycle management
-7. Translation Module
+## 🛠️ Tech Stack
 
-Handles:
+| Layer | Technology |
+|:------|:-----------|
+| **Frontend** | React 18, Tailwind CSS, React Router, Axios, Zustand / Context API |
+| **Backend** | Java 17, Spring Boot 3, Spring Security, Spring Data JPA, Hibernate, Maven |
+| **Database** | MySQL 8 |
+| **Real-time** | WebSocket / STOMP (chat & signaling), WebRTC (audio/video) |
+| **Auth** | JWT, BCrypt, Role-Based Access Control (RBAC) |
+| **AI Layer** | LLM / Translation API, Speech-to-Text, optional Text-to-Speech |
+| **DevOps** | Docker, Nginx, Railway / Render / AWS / VPS |
 
-chat translation
-transcript translation
-language mapping
-translated history persistence
-8. Prescription Module
+---
 
-Handles:
+## ⚙️ System Architecture
 
-e-prescription creation
-medicine instructions
-prescription history
-consultation summary linkage
-9. Notification Module
+```mermaid
+graph TB
+    subgraph Client["🖥️ Client Layer"]
+        PA["👤 Patient App<br/>(React)"]
+        DA["🩺 Doctor App<br/>(React)"]
+        AA["🛡️ Admin Panel<br/>(React)"]
+    end
 
-Handles:
+    subgraph API["⚡ API Gateway / Nginx"]
+        NG["Nginx Reverse Proxy"]
+    end
 
-confirmations
-reminders
-cancellations
-consultation alerts
-10. Admin Module
+    subgraph Backend["☕ Spring Boot Backend"]
+        AUTH["🔐 Auth Service<br/>JWT + RBAC"]
+        DOC["👨‍⚕️ Doctor Service"]
+        APT["📅 Appointment Service"]
+        CHAT["💬 Chat Service<br/>WebSocket/STOMP"]
+        CONSULT["📹 Consultation Service<br/>WebRTC Signaling"]
+        RX["💊 Prescription Service"]
+        NOTIF["🔔 Notification Service"]
+        TRANS["🌐 Translation Service"]
+    end
 
-Handles:
+    subgraph Data["🗄️ Data Layer"]
+        DB[("MySQL<br/>Database")]
+    end
 
-doctor approval
-user oversight
-analytics
-moderation
-API Overview
-Auth
-POST /api/v1/auth/register
-POST /api/v1/auth/login
-POST /api/v1/auth/refresh
-GET  /api/v1/auth/me
-Doctors
-GET  /api/v1/doctors
-GET  /api/v1/doctors/{id}
-PUT  /api/v1/doctors/profile
-POST /api/v1/doctors/availability
-GET  /api/v1/doctors/availability/{doctorId}
-Appointments
-POST /api/v1/appointments
-GET  /api/v1/appointments/my
-PUT  /api/v1/appointments/{id}/reschedule
-PUT  /api/v1/appointments/{id}/cancel
-PUT  /api/v1/appointments/{id}/accept
-PUT  /api/v1/appointments/{id}/reject
-Chat
-GET /api/v1/chats/{appointmentId}/messages
-Prescriptions
-POST /api/v1/prescriptions
-GET  /api/v1/prescriptions/{appointmentId}
-GET  /api/v1/prescriptions/patient/{patientId}
-Admin
-GET /api/v1/admin/doctors/pending
-PUT /api/v1/admin/doctors/{id}/verify
-GET /api/v1/admin/analytics/overview
-GET /api/v1/admin/users
-Realtime Events
-Chat Events
-SEND_MESSAGE
-RECEIVE_MESSAGE
-MESSAGE_TRANSLATED
-USER_TYPING
-USER_STOPPED_TYPING
-Consultation Events
-CALL_INITIATED
-CALL_ACCEPTED
-CALL_REJECTED
-CALL_ENDED
-SDP_OFFER
-SDP_ANSWER
-ICE_CANDIDATE
-Appointment / Notification Events
-APPOINTMENT_BOOKED
-APPOINTMENT_UPDATED
-APPOINTMENT_CANCELLED
-CONSULTATION_REMINDER
-Project Structure
+    subgraph External["☁️ External Services"]
+        LLM["🤖 LLM / Translation API"]
+        STT["🎙️ Speech-to-Text"]
+        STUN["📡 STUN/TURN Server"]
+    end
+
+    PA & DA & AA -->|HTTPS| NG
+    NG --> AUTH & DOC & APT & CHAT & CONSULT & RX & NOTIF
+    CHAT -->|translate| TRANS
+    CONSULT -->|signaling| CHAT
+    TRANS --> LLM
+    TRANS --> STT
+    CONSULT -.->|peer-to-peer media| STUN
+    AUTH & DOC & APT & CHAT & RX & NOTIF --> DB
+
+    style Client fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+    style Backend fill:#dcfce7,stroke:#22c55e,stroke-width:2px
+    style Data fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+    style External fill:#fce7f3,stroke:#ec4899,stroke-width:2px
+```
+
+---
+
+## 📅 Appointment Booking Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> SearchDoctor: Patient searches
+    SearchDoctor --> ViewProfile: Select doctor
+    ViewProfile --> SelectSlot: Choose time slot
+    SelectSlot --> BookingRequested: Confirm booking
+
+    BookingRequested --> Accepted: Doctor accepts
+    BookingRequested --> Rejected: Doctor rejects
+
+    Accepted --> Reminder: Send reminder
+    Reminder --> ConsultationReady: Join room
+    ConsultationReady --> InProgress: Start consultation
+    InProgress --> Completed: End consultation
+    Completed --> Prescription: Generate e-prescription
+    Prescription --> [*]
+
+    Rejected --> [*]
+
+    BookingRequested --> Cancelled: Patient cancels
+    Cancelled --> [*]
+
+    Accepted --> Rescheduled: Reschedule
+    Rescheduled --> BookingRequested
+```
+
+---
+
+## 📹 Consultation Flow
+
+```mermaid
+sequenceDiagram
+    participant P as 🧑 Patient
+    participant FE as 💻 Frontend
+    participant BE as ☕ Backend
+    participant WS as 🔌 WebSocket
+    participant AI as 🤖 Translation
+    participant D as 👨‍⚕️ Doctor
+
+    P->>FE: Join consultation room
+    FE->>BE: Validate appointment access
+    BE-->>FE: Access granted ✅
+
+    FE->>WS: Connect to room
+    D->>WS: Connect to room
+
+    Note over P,D: 💬 Chat Phase
+    P->>WS: Send chat message
+    WS->>AI: Translate message
+    AI-->>WS: Translated text
+    WS-->>D: Deliver translated message
+
+    Note over P,D: 📹 Video Call Phase
+    D->>WS: SDP Offer
+    WS-->>P: Forward SDP Offer
+    P->>WS: SDP Answer
+    WS-->>D: Forward SDP Answer
+    P->>WS: ICE Candidates
+    WS-->>D: ICE Candidates
+
+    Note over P,D: 🔗 Peer-to-peer media stream established
+
+    D->>BE: Create e-prescription
+    BE-->>P: Prescription available 💊
+```
+
+---
+
+## 🗄️ Database Design
+
+```mermaid
+erDiagram
+    USERS ||--o| PATIENTS : "is a"
+    USERS ||--o| DOCTORS : "is a"
+    USERS }o--|| ROLES : "has"
+
+    DOCTORS ||--|{ DOCTOR_AVAILABILITY : "sets"
+    DOCTORS ||--|{ APPOINTMENTS : "receives"
+    PATIENTS ||--|{ APPOINTMENTS : "books"
+
+    APPOINTMENTS ||--o| CONSULTATION_SESSIONS : "triggers"
+    APPOINTMENTS ||--|{ CHAT_MESSAGES : "contains"
+    APPOINTMENTS ||--|{ PRESCRIPTIONS : "generates"
+
+    PRESCRIPTIONS ||--|{ PRESCRIPTION_ITEMS : "includes"
+    PATIENTS ||--|{ MEDICAL_RECORDS : "owns"
+    USERS ||--|{ NOTIFICATIONS : "receives"
+    CHAT_MESSAGES ||--o{ TRANSLATIONS : "translated to"
+
+    USERS {
+        bigint id PK
+        string email
+        string password_hash
+        string phone
+        enum role
+        timestamp created_at
+    }
+    DOCTORS {
+        bigint id PK
+        bigint user_id FK
+        string specialization
+        string languages
+        boolean verified
+    }
+    APPOINTMENTS {
+        bigint id PK
+        bigint patient_id FK
+        bigint doctor_id FK
+        datetime slot_time
+        enum status
+        enum consultation_mode
+    }
+    PRESCRIPTIONS {
+        bigint id PK
+        bigint appointment_id FK
+        text diagnosis
+        text notes
+        timestamp created_at
+    }
+```
+
+---
+
+## 📦 Module Breakdown
+
+```mermaid
+graph LR
+    subgraph Core["🔐 Core"]
+        A[Auth Module]
+        U[User Management]
+    end
+
+    subgraph Discovery["🔍 Discovery"]
+        DD[Doctor Discovery]
+        AP[Appointment Module]
+    end
+
+    subgraph Consultation["💬 Consultation"]
+        CH[Chat Module]
+        CO[Consultation Module]
+        TR[Translation Module]
+    end
+
+    subgraph PostCare["📋 Post-Care"]
+        RX[Prescription Module]
+        NO[Notification Module]
+    end
+
+    subgraph Admin["🛡️ Admin"]
+        AD[Admin Module]
+    end
+
+    A --> U --> DD --> AP --> CH --> CO --> TR --> RX --> NO
+    AD -.-> U & DD & AP
+
+    style Core fill:#dbeafe,stroke:#3b82f6
+    style Discovery fill:#dcfce7,stroke:#22c55e
+    style Consultation fill:#fef3c7,stroke:#f59e0b
+    style PostCare fill:#fce7f3,stroke:#ec4899
+    style Admin fill:#f3e8ff,stroke:#a855f7
+```
+
+| # | Module | Responsibilities |
+|:--|:-------|:-----------------|
+| 1 | **Auth** | Signup / login, JWT creation & validation, role-based authorization |
+| 2 | **User Management** | Patient & doctor profiles, admin verification, account lifecycle |
+| 3 | **Doctor Discovery** | Search, specialization & language filters, availability lookup |
+| 4 | **Appointment** | Slot creation, booking, cancellation, rescheduling, status transitions |
+| 5 | **Chat** | Real-time messaging via WebSocket, message persistence, translation storage |
+| 6 | **Consultation** | WebRTC signaling, call join/leave, session lifecycle management |
+| 7 | **Translation** | Chat & transcript translation, language mapping, history persistence |
+| 8 | **Prescription** | E-prescription creation, medicine instructions, consultation summary linkage |
+| 9 | **Notification** | Confirmations, reminders, cancellation alerts, consultation notifications |
+| 10 | **Admin** | Doctor approval, user oversight, analytics, moderation |
+
+---
+
+## 🔌 API Reference
+
+<details>
+<summary><strong>Auth</strong> — <code>/api/v1/auth</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `POST` | `/register` | Register new user |
+| `POST` | `/login` | Authenticate & get JWT |
+| `POST` | `/refresh` | Refresh access token |
+| `GET` | `/me` | Get current user profile |
+
+</details>
+
+<details>
+<summary><strong>Doctors</strong> — <code>/api/v1/doctors</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `GET` | `/` | List / search doctors |
+| `GET` | `/{id}` | Get doctor profile |
+| `PUT` | `/profile` | Update own profile |
+| `POST` | `/availability` | Set availability slots |
+| `GET` | `/availability/{doctorId}` | Get doctor availability |
+
+</details>
+
+<details>
+<summary><strong>Appointments</strong> — <code>/api/v1/appointments</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `POST` | `/` | Create appointment |
+| `GET` | `/my` | List my appointments |
+| `PUT` | `/{id}/reschedule` | Reschedule appointment |
+| `PUT` | `/{id}/cancel` | Cancel appointment |
+| `PUT` | `/{id}/accept` | Doctor accepts |
+| `PUT` | `/{id}/reject` | Doctor rejects |
+
+</details>
+
+<details>
+<summary><strong>Chat</strong> — <code>/api/v1/chats</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `GET` | `/{appointmentId}/messages` | Get chat history |
+
+</details>
+
+<details>
+<summary><strong>Prescriptions</strong> — <code>/api/v1/prescriptions</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `POST` | `/` | Create prescription |
+| `GET` | `/{appointmentId}` | Get by appointment |
+| `GET` | `/patient/{patientId}` | Get patient history |
+
+</details>
+
+<details>
+<summary><strong>Admin</strong> — <code>/api/v1/admin</code></summary>
+
+| Method | Endpoint | Description |
+|:-------|:---------|:------------|
+| `GET` | `/doctors/pending` | List pending verifications |
+| `PUT` | `/doctors/{id}/verify` | Verify a doctor |
+| `GET` | `/analytics/overview` | Platform analytics |
+| `GET` | `/users` | List all users |
+
+</details>
+
+---
+
+## 📡 Real-time Events
+
+<details>
+<summary><strong>WebSocket Event Reference</strong></summary>
+
+**💬 Chat Events**
+| Event | Description |
+|:------|:------------|
+| `SEND_MESSAGE` | Client sends a chat message |
+| `RECEIVE_MESSAGE` | Server broadcasts message to room |
+| `MESSAGE_TRANSLATED` | Translated version delivered |
+| `USER_TYPING` | Typing indicator on |
+| `USER_STOPPED_TYPING` | Typing indicator off |
+
+**📹 Consultation Events**
+| Event | Description |
+|:------|:------------|
+| `CALL_INITIATED` | Doctor/patient starts call |
+| `CALL_ACCEPTED` | Callee accepts |
+| `CALL_REJECTED` | Callee rejects |
+| `CALL_ENDED` | Call terminated |
+| `SDP_OFFER` | WebRTC SDP offer |
+| `SDP_ANSWER` | WebRTC SDP answer |
+| `ICE_CANDIDATE` | ICE candidate exchange |
+
+**📅 Notification Events**
+| Event | Description |
+|:------|:------------|
+| `APPOINTMENT_BOOKED` | New appointment created |
+| `APPOINTMENT_UPDATED` | Appointment modified |
+| `APPOINTMENT_CANCELLED` | Appointment cancelled |
+| `CONSULTATION_REMINDER` | Upcoming consultation alert |
+
+</details>
+
+---
+
+## 📁 Project Structure
+
+```
 swasthyasetu/
-│
 ├── backend/
 │   ├── src/main/java/com/swasthyasetu/
-│   │   ├── config/
-│   │   ├── controller/
-│   │   ├── dto/
-│   │   ├── entity/
-│   │   ├── enums/
-│   │   ├── exception/
-│   │   ├── mapper/
-│   │   ├── repository/
-│   │   ├── security/
-│   │   ├── service/
-│   │   ├── websocket/
+│   │   ├── config/           # App & WebSocket configuration
+│   │   ├── controller/       # REST controllers
+│   │   ├── dto/              # Request/Response DTOs
+│   │   ├── entity/           # JPA entities
+│   │   ├── enums/            # Status & role enums
+│   │   ├── exception/        # Global exception handling
+│   │   ├── mapper/           # Entity ↔ DTO mappers
+│   │   ├── repository/       # Spring Data repositories
+│   │   ├── security/         # JWT filters & security config
+│   │   ├── service/          # Business logic layer
+│   │   ├── websocket/        # WebSocket handlers & config
 │   │   └── SwasthyaSetuApplication.java
-│   │
 │   ├── src/main/resources/
 │   │   ├── application.yml
-│   │   └── db/
-│   │
+│   │   └── db/               # Migration scripts
 │   └── pom.xml
-│
 ├── frontend/
 │   ├── src/
-│   │   ├── api/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── features/
-│   │   ├── hooks/
-│   │   ├── layouts/
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── store/
-│   │   ├── utils/
+│   │   ├── api/              # Axios API clients
+│   │   ├── assets/           # Static assets
+│   │   ├── components/       # Reusable UI components
+│   │   ├── features/         # Feature-specific modules
+│   │   ├── hooks/            # Custom React hooks
+│   │   ├── layouts/          # Page layouts
+│   │   ├── pages/            # Route pages
+│   │   ├── routes/           # Route definitions & guards
+│   │   ├── store/            # Zustand / Context state
+│   │   ├── utils/            # Helpers & utilities
 │   │   └── main.jsx
-│   │
 │   ├── public/
 │   ├── package.json
 │   └── vite.config.js
-│
 ├── docs/
 │   ├── diagrams/
 │   └── screenshots/
-│
 └── README.md
-Getting Started
-Prerequisites
-Java 17+
-Maven
-Node.js 18+
-MySQL
-Git
-Clone Repository
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+| Tool | Version |
+|:-----|:--------|
+| Java | 17+ |
+| Maven | 3.8+ |
+| Node.js | 18+ |
+| MySQL | 8.0+ |
+| Git | Latest |
+
+### 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/your-username/swasthyasetu.git
 cd swasthyasetu
-Backend Setup
+```
+
+### 2️⃣ Backend Setup
+
+```bash
 cd backend
 mvn clean install
 mvn spring-boot:run
-Example application.yml
-server:
-  port: 8080
+```
 
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/swasthyasetu
-    username: root
-    password: your_password
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+### 3️⃣ Frontend Setup
 
-jwt:
-  secret: your_jwt_secret_key
-  expiration: 86400000
-Frontend Setup
+```bash
 cd frontend
 npm install
 npm run dev
-Example .env
-VITE_API_BASE_URL=http://localhost:8080/api/v1
-VITE_WS_URL=http://localhost:8080/ws
-VITE_STUN_SERVER=stun:stun.l.google.com:19302
-Environment Variables
-Backend
+```
+
+### 4️⃣ Environment Variables
+
+Create `.env` files with the following:
+
+**Backend** (`backend/application.yml` or env vars)
+```env
 DB_URL=jdbc:mysql://localhost:3306/swasthyasetu
 DB_USERNAME=root
 DB_PASSWORD=your_password
 JWT_SECRET=your_secret_key
 JWT_EXPIRY=86400000
 TRANSLATION_API_KEY=your_translation_api_key
-Frontend
+```
+
+**Frontend** (`frontend/.env`)
+```env
 VITE_API_BASE_URL=http://localhost:8080/api/v1
 VITE_WS_URL=http://localhost:8080/ws
 VITE_STUN_SERVER=stun:stun.l.google.com:19302
-Deployment Architecture
-Suggested Deployment
-Frontend: Vercel / Netlify / Nginx static hosting
-Backend: Railway / Render / AWS EC2 / VPS
-Database: Managed MySQL or cloud VM
-Media Connectivity: STUN/TURN server for reliable call setup
-Reverse Proxy: Nginx for API routing and WebSocket upgrades
-Security
-JWT-secured APIs
-BCrypt password hashing
-role-based access for Patient / Doctor / Admin
-protected consultation access for valid participants only
-request payload validation
-chat input sanitization
-secure prescription ownership checks
-audit-friendly access control flow
-HTTPS-ready deployment structure
-Scalability
-Current Architecture
-single Spring Boot application
-single MySQL database
-modular monolith design
-WebSocket for signaling and chat
-WebRTC for media exchange
-direct AI translation integration
-Future Scaling Path
-split into microservices:
-auth-service
-appointment-service
-consultation-service
-notification-service
-translation-service
-Redis for caching and transient session state
-Kafka / RabbitMQ for event-driven workflows
-object storage for reports and prescription files
-Prometheus + Grafana for monitoring
-API gateway and rate limiting
-dedicated media infrastructure for high-volume consultations
-Testing Strategy
-Backend
-service layer unit tests
-controller integration tests
-repository tests
-authentication and authorization tests
-Frontend
-component tests
-form validation tests
-route guard tests
-state management tests
-Realtime
-chat delivery tests
-consultation room access tests
-WebRTC signaling flow tests
-End-to-End
-patient booking flow
-doctor acceptance flow
-consultation completion flow
-e-prescription generation flow
-translated consultation flow
-Roadmap
- User authentication and roles
- Doctor onboarding and availability
- Appointment booking flow
- Real-time chat
- WebRTC-based consultation
- E-prescription generation
- Admin verification flow
- AI-powered live translation
- Medical report uploads
- Payment gateway integration
- Family profile support
- Emergency priority booking
- AI symptom pre-screening
- Regional voice assistant
- Analytics dashboard with deeper healthcare insights
-Screenshots
+```
 
-Add images in these paths if you want screenshots to show in GitHub:
+---
 
-docs/screenshots/landing-page.png
-docs/screenshots/doctor-search.png
-docs/screenshots/booking-page.png
-docs/screenshots/consultation-room.png
-docs/screenshots/prescription-view.png
-docs/screenshots/admin-dashboard.png
+## 🚢 Deployment Architecture
 
-Example usage:
+```mermaid
+graph LR
+    subgraph Internet["🌍 Internet"]
+        USER["👤 Users"]
+    end
 
-## Screenshots
+    subgraph Infra["☁️ Cloud / VPS"]
+        NG["🔀 Nginx<br/>Reverse Proxy<br/>+ SSL"]
+        subgraph App["Application"]
+            FE["⚛️ React<br/>Static Build"]
+            BE["☕ Spring Boot<br/>API Server"]
+        end
+        DB[("🗄️ MySQL")]
+    end
 
-### Landing Page
-![Landing Page](docs/screenshots/landing-page.png)
+    subgraph ExtServices["🔗 External"]
+        TAPI["🤖 Translation API"]
+        STUN["📡 STUN/TURN"]
+    end
 
-### Doctor Search
-![Doctor Search](docs/screenshots/doctor-search.png)
+    USER -->|HTTPS| NG
+    NG -->|/| FE
+    NG -->|/api, /ws| BE
+    BE --> DB
+    BE --> TAPI
+    USER -.->|WebRTC Media| STUN
 
-### Booking Page
-![Booking Page](docs/screenshots/booking-page.png)
+    style Internet fill:#e0f2fe,stroke:#0284c7
+    style Infra fill:#f0fdf4,stroke:#16a34a
+    style ExtServices fill:#fff7ed,stroke:#ea580c
+```
 
-### Consultation Room
-![Consultation Room](docs/screenshots/consultation-room.png)
+---
 
-### Prescription View
-![Prescription View](docs/screenshots/prescription-view.png)
+## 🔒 Security
 
-### Admin Dashboard
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
-Resume Value
+| Layer | Implementation |
+|:------|:---------------|
+| **Authentication** | JWT-secured APIs with token refresh |
+| **Password** | BCrypt hashing |
+| **Authorization** | Role-based (Patient / Doctor / Admin) |
+| **Consultation** | Access restricted to valid participants only |
+| **Input** | Request payload validation & chat sanitization |
+| **Prescriptions** | Ownership verification checks |
+| **Transport** | HTTPS-ready deployment structure |
+| **Audit** | Access control flow designed for audit trails |
 
-SwasthyaSetu is a strong resume project because it demonstrates:
+---
 
-full-stack product development
-backend architecture with Spring Boot
-secure authentication and authorization
-real-time systems with WebSocket and WebRTC
-AI/LLM integration for user-facing functionality
-appointment lifecycle and healthcare workflow design
-database modeling and production-style modular architecture
-Resume-Ready Description
+## 📈 Scalability
 
-Built SwasthyaSetu, an AI-powered telehealth platform enabling doctor discovery, appointment booking, real-time chat, WebRTC-based audio/video consultation, multilingual live translation, and e-prescriptions using Java, Spring Boot, React, Tailwind, WebSocket, WebRTC, JWT, and MySQL.
+### Current: Modular Monolith
+The application is designed as a **modular monolith** — clean module boundaries that can be split into microservices when scale demands it.
 
-Author
+### Future Scaling Path
 
-Shivam Goyal
+```mermaid
+graph TB
+    subgraph Current["📦 Current — Modular Monolith"]
+        MONO["Single Spring Boot App"]
+        SQLDB[("MySQL")]
+        MONO --> SQLDB
+    end
 
-GitHub: https://github.com/your-username
-LinkedIn: https://linkedin.com/in/your-profile
-<p align="center"> <b>SwasthyaSetu brings accessibility, real-time care, and multilingual consultation into one modern digital healthcare platform.</b> </p>
+    subgraph Future["🚀 Future — Microservices"]
+        GW["API Gateway"]
+        AS["Auth Service"]
+        APS["Appointment Service"]
+        CS["Consultation Service"]
+        NS["Notification Service"]
+        TS["Translation Service"]
+        REDIS[("Redis Cache")]
+        KAFKA["Kafka / RabbitMQ"]
+        S3["Object Storage"]
+        MON["Prometheus + Grafana"]
+        
+        GW --> AS & APS & CS & NS & TS
+        AS & APS & CS & NS --> KAFKA
+        CS --> REDIS
+        TS --> REDIS
+        NS --> S3
+        GW --> MON
+    end
+
+    Current -->|"Scale when needed"| Future
+
+    style Current fill:#fef3c7,stroke:#f59e0b
+    style Future fill:#dbeafe,stroke:#3b82f6
+```
+
+---
+
+## 🧪 Testing Strategy
+
+| Layer | Tests |
+|:------|:------|
+| **Backend** | Service unit tests, controller integration tests, repository tests, auth/authz tests |
+| **Frontend** | Component tests, form validation, route guards, state management |
+| **Real-time** | Chat delivery, consultation room access, WebRTC signaling flow |
+| **E2E** | Patient booking → doctor acceptance → consultation → e-prescription → translation flow |
+
+---
+
+## 🗺️ Roadmap
+
+- [x] User authentication & role management
+- [x] Doctor onboarding & availability management
+- [x] Appointment booking lifecycle
+- [x] Real-time chat via WebSocket
+- [x] WebRTC-based audio/video consultations
+- [x] E-prescription generation
+- [x] Admin verification flow
+- [x] AI-powered live translation
+- [ ] Medical report uploads
+- [ ] Payment gateway integration
+- [ ] Family profile support
+- [ ] Emergency priority booking
+- [ ] AI symptom pre-screening
+- [ ] Regional voice assistant
+- [ ] Analytics dashboard with deeper healthcare insights
+
+---
+
+## 💼 Resume-Ready Description
+
+> Built **SwasthyaSetu**, an AI-powered telehealth platform enabling doctor discovery, appointment booking, real-time chat, WebRTC-based audio/video consultation, multilingual live translation, and e-prescriptions — using **Java 17, Spring Boot, React, Tailwind CSS, WebSocket, WebRTC, JWT, and MySQL**.
+
+---
+
+## 👤 Author
+
+**Shivam Goyal**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/your-username)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/your-profile)
+
+---
+
+<p align="center">
+  <strong>⭐ If you found this project useful, consider giving it a star!</strong>
+</p>
