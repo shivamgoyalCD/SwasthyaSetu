@@ -1,0 +1,27 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: appointment-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:swasthyasetu}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:Shivam@123}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    table: appointment_flyway_history
+    locations: classpath:db/migration/appointment
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:local-dev-secret-change-me-please-32bytes}
+    ttl: ${JWT_ACCESS_TTL:PT15M}
