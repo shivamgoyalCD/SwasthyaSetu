@@ -292,7 +292,7 @@ erDiagram
     }
     DOCTOR_PROFILE {
         uuid id PK
-        uuid user_id FK_UK
+        uuid user_id FK, UK
         varchar specialization
         varchar license_no
         varchar status
@@ -327,7 +327,7 @@ erDiagram
     }
     CONVERSATIONS {
         uuid id PK
-        uuid appointment_id FK_UK
+        uuid appointment_id FK, UK
         uuid patient_id
         uuid doctor_id
         varchar status
@@ -353,20 +353,20 @@ erDiagram
     }
     CONSULTATIONS {
         uuid id PK
-        uuid appointment_id FK_UK
+        uuid appointment_id FK, UK
         varchar status
         timestamp started_at
         timestamp ended_at
     }
     LLM_SUMMARY {
         uuid id PK
-        uuid consultation_id FK_UK
+        uuid consultation_id FK, UK
         text json_summary
         timestamp created_at
     }
     PRESCRIPTIONS {
         uuid id PK
-        uuid consultation_id FK_UK
+        uuid consultation_id FK, UK
         varchar pdf_s3_key
         timestamp created_at
     }
