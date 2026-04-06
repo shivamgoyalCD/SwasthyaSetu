@@ -52,6 +52,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
   }
 
   private void handleJoin(WebSocketSession session, SocketChatRequest request) throws IOException {
+    if (!isParticipantRole(currentUser(session).getRole())) {
+      sendError(session, "FORBIDDEN", "Patient or doctor role required");
+      return;
+    }
+
     UUID conversationId = parseConversationId(request.getConversationId());
     if (conversationId == null) {
       sendError(session, "INVALID_CONVERSATION_ID", "conversationId must be a valid UUID");
@@ -75,6 +80,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
   }
 
   private void handleMessage(WebSocketSession session, SocketChatRequest request) throws IOException {
+    if (!isParticipantRole(currentUser(session).getRole())) {
+      sendError(session, "FORBIDDEN", "Patient or doctor role required");
+      return;
+    }
+
     UUID conversationId = parseConversationId(request.getConversationId());
     if (conversationId == null) {
       sendError(session, "INVALID_CONVERSATION_ID", "conversationId must be a valid UUID");
@@ -159,5 +169,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
   private boolean isBlank(String value) {
     return value == null || value.trim().isEmpty();
+  }
+
+  private boolean isParticipantRole(String role) {
+    return "PATIENT".equals(role) || "DOCTOR".equals(role);
   }
 }

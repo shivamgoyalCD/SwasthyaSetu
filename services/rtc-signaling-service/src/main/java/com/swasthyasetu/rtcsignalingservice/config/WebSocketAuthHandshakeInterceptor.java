@@ -1,4 +1,4 @@
-package com.swasthyasetu.chatservice.config;
+package com.swasthyasetu.rtcsignalingservice.config;
 
 import java.util.Collection;
 import java.util.Map;

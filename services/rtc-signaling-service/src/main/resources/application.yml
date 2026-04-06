@@ -10,5 +10,10 @@ spring:
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
 
+security:
+  jwt:
+    secret: ${JWT_SECRET:local-dev-secret-change-me-please-32bytes}
+    ttl: ${JWT_ACCESS_TTL:PT15M}
+
 translation-service:
   base-url: ${TRANSLATION_SERVICE_BASE_URL:http://translation-service:8085}

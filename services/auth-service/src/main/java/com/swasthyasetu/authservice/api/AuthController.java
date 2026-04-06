@@ -7,6 +7,7 @@ import com.swasthyasetu.authservice.dto.RefreshTokenResponse;
 import com.swasthyasetu.authservice.dto.VerifyOtpRequest;
 import com.swasthyasetu.authservice.dto.VerifyOtpResponse;
 import com.swasthyasetu.authservice.exception.OtpVerificationException;
+import com.swasthyasetu.authservice.exception.RequestOtpException;
 import com.swasthyasetu.authservice.exception.RefreshTokenException;
 import com.swasthyasetu.authservice.service.AuthService;
 import com.swasthyasetu.common.dtos.ApiError;
@@ -27,9 +28,32 @@ public class AuthController {
   private final AuthService authService;
 
   @PostMapping("/request-otp")
-  public ApiResponse<RequestOtpResponse> requestOtp(@RequestBody RequestOtpRequest request) {
-    UUID sessionId = authService.requestOtp(request.getPhone());
-    return new ApiResponse<>(true, new RequestOtpResponse(sessionId.toString()), null);
+  public ResponseEntity<ApiResponse<RequestOtpResponse>> requestOtp(@RequestBody RequestOtpRequest request) {
+    if (request == null || request.getPhone() == null || request.getPhone().isBlank()) {
+      return ResponseEntity.badRequest().body(new ApiResponse<>(
+          false,
+          null,
+          new ApiError("INVALID_REQUEST", "phone is required", null)
+      ));
+    }
+
+    try {
+      UUID sessionId = authService.requestOtp(request.getPhone());
+      return ResponseEntity.ok(new ApiResponse<>(true, new RequestOtpResponse(sessionId.toString()), null));
+    } catch (RequestOtpException ex) {
+      HttpStatus status;
+      if (ex.getStatus() == RequestOtpException.Status.TOO_MANY_REQUESTS) {
+        status = HttpStatus.TOO_MANY_REQUESTS;
+      } else {
+        status = HttpStatus.BAD_REQUEST;
+      }
+
+      return ResponseEntity.status(status).body(new ApiResponse<>(
+          false,
+          null,
+          new ApiError(ex.getCode(), ex.getMessage(), null)
+      ));
+    }
   }
 
   @PostMapping("/verify-otp")

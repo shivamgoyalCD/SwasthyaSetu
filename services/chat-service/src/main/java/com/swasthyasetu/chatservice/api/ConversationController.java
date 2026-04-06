@@ -35,6 +35,14 @@ public class ConversationController {
       ));
     }
 
+    if (!"PATIENT".equals(currentUser.get().getRole()) && !"DOCTOR".equals(currentUser.get().getRole())) {
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse<>(
+          false,
+          null,
+          new ApiError("FORBIDDEN", "Patient or doctor role required", null)
+      ));
+    }
+
     UUID parsedAppointmentId;
     try {
       parsedAppointmentId = UUID.fromString(appointmentId);

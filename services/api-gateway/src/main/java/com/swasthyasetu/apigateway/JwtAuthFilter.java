@@ -39,7 +39,11 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
   }
 
   private boolean isPublicPath(String path) {
-    return "/health".equals(path) || "/auth".equals(path) || path.startsWith("/auth/");
+    return "/health".equals(path)
+        || "/auth".equals(path)
+        || path.startsWith("/auth/")
+        || "/api/v1/auth".equals(path)
+        || path.startsWith("/api/v1/auth/");
   }
 
   private Mono<Void> unauthorized(ServerWebExchange exchange) {

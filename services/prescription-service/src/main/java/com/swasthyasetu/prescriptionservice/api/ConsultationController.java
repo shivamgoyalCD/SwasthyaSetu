@@ -49,11 +49,11 @@ public class ConsultationController {
       ));
     }
 
-    if (!"PATIENT".equals(currentUser.get().getRole()) && !"DOCTOR".equals(currentUser.get().getRole())) {
+    if (!"DOCTOR".equals(currentUser.get().getRole())) {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse<>(
           false,
           null,
-          new ApiError("FORBIDDEN", "Patient or doctor role required", null)
+          new ApiError("FORBIDDEN", "Doctor role required", null)
       ));
     }
 
@@ -94,11 +94,11 @@ public class ConsultationController {
       ));
     }
 
-    if (!"DOCTOR".equals(currentUser.get().getRole()) && !"ADMIN".equals(currentUser.get().getRole())) {
+    if (!"DOCTOR".equals(currentUser.get().getRole())) {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse<>(
           false,
           null,
-          new ApiError("FORBIDDEN", "Doctor or admin role required", null)
+          new ApiError("FORBIDDEN", "Doctor role required", null)
       ));
     }
 
@@ -166,11 +166,11 @@ public class ConsultationController {
       ));
     }
 
-    if (!"DOCTOR".equals(currentUser.get().getRole()) && !"ADMIN".equals(currentUser.get().getRole())) {
+    if (!"DOCTOR".equals(currentUser.get().getRole())) {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse<>(
           false,
           null,
-          new ApiError("FORBIDDEN", "Doctor or admin role required", null)
+          new ApiError("FORBIDDEN", "Doctor role required", null)
       ));
     }
 
@@ -215,11 +215,11 @@ public class ConsultationController {
       ));
     }
 
-    if (!"DOCTOR".equals(currentUser.get().getRole()) && !"ADMIN".equals(currentUser.get().getRole())) {
+    if (!"DOCTOR".equals(currentUser.get().getRole())) {
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiResponse<>(
           false,
           null,
-          new ApiError("FORBIDDEN", "Doctor or admin role required", null)
+          new ApiError("FORBIDDEN", "Doctor role required", null)
       ));
     }
 

@@ -62,17 +62,29 @@ public class RtcWebSocketHandler extends TextWebSocketHandler {
   }
 
   private void handleJoinRoom(WebSocketSession session, SocketRtcRequest request) throws IOException {
+    SessionUser currentUser = currentUser(session);
+    if (!isParticipantRole(currentUser.role())) {
+      sendError(session, "FORBIDDEN", "Patient or doctor role required");
+      return;
+    }
+
     UUID appointmentId = parseUuid(request.getAppointmentId());
     if (appointmentId == null) {
       sendError(session, "INVALID_APPOINTMENT_ID", "appointmentId must be a valid UUID");
       return;
     }
 
-    UUID userId = parseUuid(request.getUserId());
-    if (userId == null) {
+    UUID requestedUserId = parseUuid(request.getUserId());
+    if (request.getUserId() != null && requestedUserId == null) {
       sendError(session, "INVALID_USER_ID", "userId must be a valid UUID");
       return;
     }
+    if (requestedUserId != null && !requestedUserId.equals(currentUser.userId())) {
+      sendError(session, "FORBIDDEN", "userId does not match the authenticated caller");
+      return;
+    }
+
+    UUID userId = currentUser.userId();
 
     if (!rtcRoomService.roomExists(appointmentId)) {
       sendError(session, "ROOM_NOT_FOUND", "RTC room not found");
@@ -164,17 +176,29 @@ public class RtcWebSocketHandler extends TextWebSocketHandler {
   }
 
   private void handleLeaveRoom(WebSocketSession session, SocketRtcRequest request) throws IOException {
+    SessionUser currentUser = currentUser(session);
+    if (!isParticipantRole(currentUser.role())) {
+      sendError(session, "FORBIDDEN", "Patient or doctor role required");
+      return;
+    }
+
     UUID appointmentId = parseUuid(request.getAppointmentId());
     if (appointmentId == null) {
       sendError(session, "INVALID_APPOINTMENT_ID", "appointmentId must be a valid UUID");
       return;
     }
 
-    UUID userId = parseUuid(request.getUserId());
-    if (userId == null) {
+    UUID requestedUserId = parseUuid(request.getUserId());
+    if (request.getUserId() != null && requestedUserId == null) {
       sendError(session, "INVALID_USER_ID", "userId must be a valid UUID");
       return;
     }
+    if (requestedUserId != null && !requestedUserId.equals(currentUser.userId())) {
+      sendError(session, "FORBIDDEN", "userId does not match the authenticated caller");
+      return;
+    }
+
+    UUID userId = currentUser.userId();
 
     UUID joinedUserId = joinedUserId(session, appointmentId);
     if (joinedUserId == null) {
@@ -434,5 +458,18 @@ public class RtcWebSocketHandler extends TextWebSocketHandler {
 
   private boolean isBlank(String value) {
     return value == null || value.trim().isEmpty();
+  }
+
+  private SessionUser currentUser(WebSocketSession session) {
+    Object userId = session.getAttributes().get("userId");
+    Object role = session.getAttributes().get("role");
+    return new SessionUser(UUID.fromString(String.valueOf(userId)), String.valueOf(role));
+  }
+
+  private boolean isParticipantRole(String role) {
+    return "PATIENT".equals(role) || "DOCTOR".equals(role);
+  }
+
+  private record SessionUser(UUID userId, String role) {
   }
 }

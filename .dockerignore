@@ -1,0 +1,9 @@
+.git
+.github
+.idea
+frontend/node_modules
+frontend/dist
+**/target
+**/node_modules
+**/dist
+infra
